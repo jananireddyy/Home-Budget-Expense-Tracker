@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Reports | Home Budget{% endblock %}
+{% block content %}
+<h1>Reports & Analysis</h1>
+<div class="content-card">
+<h4>Category-wise Expenses</h4>
+<table class="table">
+<thead><tr><th>Category</th><th>Total Expenses</th></tr></thead>
+<tbody>
+{% for item in category_data %}
+<tr><td>{{ item.category_name }}</td><td>?{{ item.total }}</td></tr>
+{% else %}
+<tr><td colspan="2" class="text-center">No expense data available.</td></tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Budgets | Home Budget{% endblock %}
+{% block content %}
+<h1>Monthly Budgets</h1>
+<div class="content-card">
+<table class="table">
+<thead><tr><th>Category</th><th>Month</th><th>Year</th><th>Budget</th><th>Spent</th><th>Status</th></tr></thead>
+<tbody>
+{% for item in budgets %}
+<tr>
+<td>{{ item.category_name }}</td>
+<td>{{ item.budget_month }}</td>
+<td>{{ item.budget_year }}</td>
+<td>?{{ item.budget_amount }}</td>
+<td>?{{ item.spent }}</td>
+<td>
+{% if item.spent > item.budget_amount %}
+<span class="badge text-bg-danger">Exceeded</span>
+{% else %}
+<span class="badge text-bg-success">Within budget</span>
+{% endif %}
+</td>
+</tr>
+{% else %}
+<tr><td colspan="6" class="text-center">No budgets configured yet.</td></tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}

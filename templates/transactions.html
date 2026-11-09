@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Transactions | Home Budget{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h1>Transactions</h1>
+    <a class="btn btn-primary" href="{{ url_for('add_transaction') }}">+ Add Transaction</a>
+</div>
+<div class="content-card">
+<table class="table align-middle">
+    <thead><tr><th>Date</th><th>Category</th><th>Type</th><th>Description</th><th>Amount</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for item in transactions %}
+    <tr>
+        <td>{{ item.transaction_date }}</td>
+        <td>{{ item.category_name }}</td>
+        <td>{{ item.transaction_type }}</td>
+        <td>{{ item.description or '-' }}</td>
+        <td>?{{ item.amount }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('delete_transaction', transaction_id=item.transaction_id) }}" onsubmit="return confirm('Delete this transaction?')">
+                <button class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6" class="text-center">No transactions found.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
